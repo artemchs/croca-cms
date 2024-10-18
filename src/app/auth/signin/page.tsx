@@ -1,11 +1,11 @@
-import { AuthCard } from "./_components/AuthCard";
-import AuthErrorAlert from "./_components/AuthErrorAlert";
+import SignInCard from "./_components/SignInCard";
+import SignInErrorAlert from "./_components/SignInErrorAlert";
 
-export default function AuthPage() {
+export default function Page() {
   return (
     <div className="flex flex-col gap-4">
-      <AuthErrorAlert />
-      <AuthCard />
+      <SignInErrorAlert />
+      <SignInCard />
     </div>
   );
 }

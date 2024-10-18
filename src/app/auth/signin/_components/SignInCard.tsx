@@ -20,7 +20,7 @@ const content = {
   signInWithGoogle: "Войти через Google",
 };
 
-export function AuthCard() {
+export default function SignInCard() {
   const [isLoading, setIsLoading] = useState(false);
 
   return (

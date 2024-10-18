@@ -8,7 +8,7 @@ const content = {
   title: "Не удалось войти",
 };
 
-export default function AuthErrorAlert() {
+export default function SignInErrorAlert() {
   const searchParams = useSearchParams();
 
   const error = searchParams.get("error");
