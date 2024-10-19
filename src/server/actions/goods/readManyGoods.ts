@@ -1,6 +1,6 @@
-import { PrismaTransaction } from "@/server/db";
-import { ReadManyGoodsInput } from "@/utils/validation/goods/readManyGoods";
-import { Prisma } from "@prisma/client";
+import { type PrismaTransaction } from "@/server/db";
+import { type ReadManyGoodsInput } from "@/utils/validation/goods/readManyGoods";
+import { type Prisma } from "@prisma/client";
 
 export const readManyGoods = async ({
   tx,
