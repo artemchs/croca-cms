@@ -37,7 +37,7 @@ export default function SignInCard() {
             setIsLoading(true);
             await signIn("google", {
               redirect: true,
-              callbackUrl: "/",
+              callbackUrl: "/dashboard",
             });
           }}
         >
