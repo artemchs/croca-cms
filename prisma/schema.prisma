@@ -69,21 +69,21 @@ model Good {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name                          String
-    sku                           String
-    description                   String?                             @db.Text
-    oldPrice                      Decimal                             @default(0) @db.Decimal(10, 2)
-    price                         Decimal                             @default(0) @db.Decimal(10, 2)
-    quantity                      Int                                 @default(0)
-    media                         GoodsMedia[]
-    tags                          GoodsTag[]
-    category                      GoodsCategory?                      @relation(fields: [categoryId], references: [id])
-    categoryId                    String?
-    group                         GoodsGroup?                         @relation(fields: [groupId], references: [id])
-    groupId                       String?
-    attributeValues               GoodsAttributeValue[]
-    additionalIdentificatorValues GoodsAdditionalIdentificatorValue[]
-    characteristicValues          GoodsCharacteristicValue[]
+    name                 String
+    sku                  String
+    description          String?                    @db.Text
+    oldPrice             Decimal                    @default(0) @db.Decimal(10, 2)
+    price                Decimal                    @default(0) @db.Decimal(10, 2)
+    quantity             Int                        @default(0)
+    media                GoodsMedia[]
+    tags                 GoodsTag[]
+    category             GoodsCategory?             @relation(fields: [categoryId], references: [id])
+    categoryId           String?
+    group                GoodsGroup?                @relation(fields: [groupId], references: [id])
+    groupId              String?
+    attributeValues      GoodsAttributeValue[]
+    additionalIdValues   GoodsAdditionalIdValue[]
+    characteristicValues GoodsCharacteristicValue[]
 }
 
 model GoodsGroup {
@@ -125,23 +125,23 @@ model GoodsAttributeValue {
     attributeId String?
 }
 
-model GoodsAdditionalIdentificator {
+model GoodsAdditionalId {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     name   String
-    values GoodsAdditionalIdentificatorValue[]
+    values GoodsAdditionalIdValue[]
 }
 
-model GoodsAdditionalIdentificatorValue {
+model GoodsAdditionalIdValue {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     value           String
     goods           Good[]
-    identificator   GoodsAdditionalIdentificator? @relation(fields: [identificatorId], references: [id])
+    identificator   GoodsAdditionalId? @relation(fields: [identificatorId], references: [id])
     identificatorId String?
 }
 
