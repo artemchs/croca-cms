@@ -105,9 +105,9 @@ model GoodsMedia {
 }
 
 model GoodsMediaToGood {
-    media   GoodsMedia @relation(fields: [mediaId], references: [id])
+    media   GoodsMedia @relation(fields: [mediaId], references: [id], onDelete: Cascade)
     mediaId String
-    good    Good       @relation(fields: [goodId], references: [id])
+    good    Good       @relation(fields: [goodId], references: [id], onDelete: Cascade)
     goodId  String
 
     index Int
