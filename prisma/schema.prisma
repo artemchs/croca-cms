@@ -71,7 +71,7 @@ model Good {
 
     name                 String
     sku                  String
-    description          String?                    @db.Text
+    description          String                     @default("") @db.Text
     oldPrice             Decimal                    @default(0) @db.Decimal(10, 2)
     price                Decimal                    @default(0) @db.Decimal(10, 2)
     quantity             Int                        @default(0)
