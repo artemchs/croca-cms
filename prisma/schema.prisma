@@ -82,7 +82,7 @@ model Good {
     group                GoodsGroup?                @relation(fields: [groupId], references: [id])
     groupId              String?
     attributeValues      GoodsAttributeValue[]
-    additionalIdValues   GoodsAdditionalIdValue[]
+    idValues             GoodsIdValue[]
     characteristicValues GoodsCharacteristicValue[]
 }
 
@@ -125,24 +125,24 @@ model GoodsAttributeValue {
     attributeId String?
 }
 
-model GoodsAdditionalId {
+model GoodsId {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     name   String
-    values GoodsAdditionalIdValue[]
+    values GoodsIdValue[]
 }
 
-model GoodsAdditionalIdValue {
+model GoodsIdValue {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    value           String
-    goods           Good[]
-    identificator   GoodsAdditionalId? @relation(fields: [identificatorId], references: [id])
-    identificatorId String?
+    value     String
+    goods     Good[]
+    goodsId   GoodsId? @relation(fields: [goodsIdId], references: [id])
+    goodsIdId String?
 }
 
 model GoodsCharacteristic {
