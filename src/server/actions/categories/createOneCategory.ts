@@ -1,9 +1,19 @@
-import { z } from "zod";
+import { type PrismaTransaction } from "@/server/db";
+import { type CreateOneCategoryInput } from "@/utils/validation/categories/createOneCategory";
+import { readOneCategory } from "./readOneCategory";
 
-export const createOneCategorySchema = z.object({
-  name: z.string().min(1),
-  description: z.string().optional(),
-  parentId: z.string().optional(),
-});
+export const createOneCategory = async ({
+  tx,
+  payload,
+}: {
+  tx: PrismaTransaction;
+  payload: CreateOneCategoryInput;
+}) => {
+  if (payload.parentId) {
+    await readOneCategory({ tx, payload: { id: payload.parentId } });
+  }
 
-export type CreateOneCategoryInput = z.infer<typeof createOneCategorySchema>;
+  return tx.goodsCategory.create({
+    data: payload,
+  });
+};

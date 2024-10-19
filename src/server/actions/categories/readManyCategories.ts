@@ -1,14 +1,39 @@
-import { z } from "zod";
+import { type PrismaTransaction } from "@/server/db";
+import { type ReadManyCategoriesInput } from "@/utils/validation/categories/readManyCategories";
+import { type Prisma } from "@prisma/client";
 
-export const readManyCategories = z.object({
-  limit: z.number().int().positive().optional().default(10),
-  offset: z.number().int().nonnegative().optional().default(0),
-  search: z.string().optional(),
-  filters: z
-    .object({
-      parentId: z.string().optional(),
-    })
-    .optional(),
-});
+export const readManyCategories = async ({
+  tx,
+  payload,
+}: {
+  tx: PrismaTransaction;
+  payload: ReadManyCategoriesInput;
+}) => {
+  const { search, filters, cursor, limit, orderBy } = payload;
 
-export type ReadManyCategoriesInput = z.infer<typeof readManyCategories>;
+  const query: Prisma.GoodsCategoryFindManyArgs = {
+    where: {},
+    take: limit,
+    cursor: cursor ? { id: cursor } : undefined,
+    skip: cursor ? 1 : 0,
+    orderBy: orderBy ? { [orderBy.field]: orderBy.direction } : undefined,
+  };
+
+  if (query.where) {
+    if (search) {
+      query.where.name = {
+        contains: search,
+        mode: "insensitive",
+      };
+    }
+
+    if (filters?.parentId) {
+      query.where.parentId = filters.parentId;
+    }
+  }
+
+  return await Promise.all([
+    tx.goodsCategory.findMany(query),
+    tx.goodsCategory.count({ where: query.where }),
+  ]);
+};

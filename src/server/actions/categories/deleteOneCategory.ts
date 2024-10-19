@@ -1,8 +1,19 @@
-import { z } from "zod";
-import { readOneCategorySchema } from "./readOneCategory";
+import { type PrismaTransaction } from "@/server/db";
+import { type DeleteOneCategoryInput } from "@/utils/validation/categories/deleteOneCategory";
+import { readOneCategory } from "./readOneCategory";
 
-export const deleteOneCategory = z.object({
-  ...readOneCategorySchema.shape,
-});
+export const deleteOneCategory = async ({
+  tx,
+  payload,
+}: {
+  tx: PrismaTransaction;
+  payload: DeleteOneCategoryInput;
+}) => {
+  await readOneCategory({ tx, payload });
 
-export type DeleteOneCategoryInput = z.infer<typeof deleteOneCategory>;
+  return tx.goodsCategory.delete({
+    where: {
+      id: payload.id,
+    },
+  });
+};
