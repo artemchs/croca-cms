@@ -75,7 +75,6 @@ model Good {
     oldPrice             Decimal                    @default(0) @db.Decimal(10, 2)
     price                Decimal                    @default(0) @db.Decimal(10, 2)
     quantity             Int                        @default(0)
-    media                GoodsMedia[]
     tags                 GoodsTag[]
     category             GoodsCategory?             @relation(fields: [categoryId], references: [id])
     categoryId           String?
@@ -84,6 +83,7 @@ model Good {
     attributeValues      GoodsAttributeValue[]
     idValues             GoodsIdValue[]
     characteristicValues GoodsCharacteristicValue[]
+    mediaToGood          GoodsMediaToGood[]
 }
 
 model GoodsGroup {
@@ -100,9 +100,19 @@ model GoodsMedia {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    key    String
-    goods  Good   @relation(fields: [goodId], references: [id])
-    goodId String
+    key         String
+    mediaToGood GoodsMediaToGood[]
+}
+
+model GoodsMediaToGood {
+    media   GoodsMedia @relation(fields: [mediaId], references: [id])
+    mediaId String
+    good    Good       @relation(fields: [goodId], references: [id])
+    goodId  String
+
+    index Int
+
+    @@id([mediaId, goodId, index])
 }
 
 model GoodsAttribute {
