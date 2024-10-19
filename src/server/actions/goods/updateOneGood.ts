@@ -21,7 +21,7 @@ export const updateOneGood = async ({
       name: payload.name,
       sku: payload.sku,
       description: payload.description,
-      oldPrice: payload.oldPrice,
+      fullPrice: payload.fullPrice,
       price: payload.price,
       quantity: payload.quantity,
       categoryId: payload.categoryId,

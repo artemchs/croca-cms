@@ -14,6 +14,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum AsyncJobStatus {
+    PENDING // Job is waiting to be processed
+    PROCESSING // Job is being processed
+    COMPLETED // Job has been processed successfully
+    FAILED // Job has been processed with an error
+}
+
 // Necessary for Next auth
 model Account {
     id                       String  @id @default(cuid())
@@ -72,7 +79,7 @@ model Good {
     name                 String
     sku                  String
     description          String                     @default("") @db.Text
-    oldPrice             Decimal                    @default(0) @db.Decimal(10, 2)
+    fullPrice            Decimal                    @default(0) @db.Decimal(10, 2)
     price                Decimal                    @default(0) @db.Decimal(10, 2)
     quantity             Int                        @default(0)
     tags                 GoodsTag[]
@@ -195,4 +202,25 @@ model GoodsCategory {
     parentId    String?
     parent      GoodsCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
     children    GoodsCategory[] @relation("CategoryHierarchy")
+}
+
+model GoodsImport {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    status   AsyncJobStatus     @default(PENDING)
+    schema   GoodsImportSchema? @relation(fields: [schemaId], references: [id])
+    schemaId String?
+    message  String?            @db.Text
+    fileKey  String
+}
+
+model GoodsImportSchema {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    schema  Json
+    imports GoodsImport[]
 }
