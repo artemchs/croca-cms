@@ -16,3 +16,7 @@ export const readManyGoodsImportsSchema = z.object({
     })
     .optional(),
 });
+
+export type ReadManyGoodsImportsInput = z.infer<
+  typeof readManyGoodsImportsSchema
+>;

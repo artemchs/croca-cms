@@ -5,6 +5,6 @@ export const createOneGoodsImportSchema = z.object({
   schemaId: z.string().min(1),
 });
 
-export type CreateOneGoodsImportSchemaInput = z.infer<
+export type CreateOneGoodsImportInput = z.infer<
   typeof createOneGoodsImportSchema
 >;

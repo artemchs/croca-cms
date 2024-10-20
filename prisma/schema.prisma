@@ -221,6 +221,7 @@ model GoodsImportSchema {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    name    String
     schema  Json
     imports GoodsImport[]
 }

@@ -4,6 +4,4 @@ export const readOneGoodsImportSchema = z.object({
   id: z.string().min(1),
 });
 
-export type ReadOneGoodsImportSchemaInput = z.infer<
-  typeof readOneGoodsImportSchema
->;
+export type ReadOneGoodsImportInput = z.infer<typeof readOneGoodsImportSchema>;
