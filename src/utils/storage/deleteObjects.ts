@@ -1,8 +1,11 @@
 import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
-import { storage } from "../../server/storage";
+import { type Storage } from "../../server/storage";
 import { env } from "@/env";
 
-export const deleteObjects = async (params: { Keys: string[] }) => {
+export const deleteObjects = async (
+  client: Storage,
+  params: { Keys: string[] },
+) => {
   try {
     const command = new DeleteObjectsCommand({
       Bucket: env.S3_BUCKET,
@@ -12,7 +15,7 @@ export const deleteObjects = async (params: { Keys: string[] }) => {
       },
     });
 
-    await storage.send(command);
+    await client.send(command);
   } catch (error) {
     console.error(error);
     throw new Error("Failed to delete objects from S3");

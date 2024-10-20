@@ -6,14 +6,17 @@ import { transformExcelToJson } from "./utils/transformExcelToJson";
 import { validateAndParseGoodsImportSchema } from "./utils/validateAndParseGoodsImportSchema";
 import { mapJsonToGoods } from "./utils/mapJsonToGoods";
 import { uploadMappedGoodsToDb } from "./utils/uploadMappedGoodsToDb";
+import { type Storage } from "@/server/storage";
 
 export type GoodsImportJsonItem = Record<string, unknown>;
 
 export const createOneGoodsImport = async ({
   tx,
+  storage,
   payload,
 }: {
   tx: PrismaTransaction;
+  storage: Storage;
   payload: CreateOneGoodsImportInput;
 }) => {
   let goodsImportId: string | null = null;
@@ -26,7 +29,9 @@ export const createOneGoodsImport = async ({
 
     const schemaData = validateAndParseGoodsImportSchema(goodsImportSchema);
 
-    const goodsImportFile = await downloadObject({ Key: payload.fileKey });
+    const goodsImportFile = await downloadObject(storage, {
+      Key: payload.fileKey,
+    });
 
     const goodsImport = await tx.goodsImport.create({
       data: {
