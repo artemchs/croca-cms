@@ -5,6 +5,9 @@ export const readManyGoodsImportsSchema = z.object({
   filters: z
     .object({
       schemaId: z.string().optional(),
+      status: z
+        .enum(["PENDING", "PROCESSING", "COMPLETED", "FAILED"])
+        .optional(),
     })
     .optional(),
   cursor: z.string().optional(),
