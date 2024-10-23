@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 export function GoodsIdFormFields({
   form,
 }: {
-  form: UseFormReturn<CreateOneIdInput | UpdateOneIdInput, unknown, undefined>;
+  form: UseFormReturn<CreateOneIdInput, unknown, undefined>;
 }) {
   return (
     <>

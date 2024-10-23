@@ -27,6 +27,7 @@ export function CreateOneGoodsIdForm() {
   const { mutate, isPending } = api.ids.createOne.useMutation({
     onSuccess() {
       router.push("/admin/ids");
+      toast.success("Идентификатор успешно создан");
     },
     onError({ message }) {
       toast.error(message);
