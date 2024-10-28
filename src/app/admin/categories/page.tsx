@@ -6,7 +6,12 @@ import { api } from "@/trpc/react";
 export default function Page() {
   const { limit, orderBy, page, query } = useEntityListParams();
 
-  const {} = api.categories.
+  const {} = api.categories.readMany.useQuery({
+    page,
+    limit,
+    search: query,
+    orderBy: orderBy,
+  })
 
   return (
     <div>

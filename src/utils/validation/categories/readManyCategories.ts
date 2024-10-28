@@ -1,3 +1,4 @@
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/utils/constants";
 import { z } from "zod";
 
 export const readManyCategoriesSchema = z.object({
@@ -7,8 +8,8 @@ export const readManyCategoriesSchema = z.object({
       parentId: z.string().optional(),
     })
     .optional(),
-  cursor: z.string().optional(),
-  limit: z.number().min(1).max(100).optional(),
+  page: z.number().min(1).default(DEFAULT_PAGE),
+  limit: z.number().min(1).max(1000).default(DEFAULT_PAGE_SIZE),
   orderBy: z
     .object({
       field: z.string(),
