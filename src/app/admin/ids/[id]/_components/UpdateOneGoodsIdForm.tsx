@@ -29,7 +29,7 @@ export function UpdateOneGoodsIdForm({
   });
 
   const { mutate, isPending } = api.ids.updateOne.useMutation({
-    onSuccess: async () => {
+    async onSuccess() {
       toast.success("Идентификатор успешно обновлен");
       await Promise.all([
         apiUtils.ids.readOne.invalidate({ id: data.id }),

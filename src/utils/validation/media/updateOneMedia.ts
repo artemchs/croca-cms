@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneMediaSchema } from "./readOneMedia";
 import { createOneMediaSchema } from "./createOneMedia";
+import { readOneMediaSchema } from "./readOneMedia";
 
 export const updateOneMediaSchema = z.object({
   ...readOneMediaSchema.shape,

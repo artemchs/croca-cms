@@ -1,10 +1,10 @@
+import { env } from "@/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { type Storage } from "../../server/storage";
-import { env } from "@/env";
 
 export const uploadObject = async (
   client: Storage,
-  params: { Key: string; Body: Buffer },
+  params: { Key: string; Body: Buffer }
 ) => {
   try {
     const command = new PutObjectCommand({

@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { Decimal } from "decimal.js";
+import { z } from "zod";
 
 export const createOneGoodSchema = z.object({
   name: z.string().min(1),

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneAttributeSchema } from "./readOneAttribute";
 import { createOneAttributeSchema } from "./createOneAttribute";
+import { readOneAttributeSchema } from "./readOneAttribute";
 
 export const updateOneAttributeSchema = z.object({
   ...readOneAttributeSchema.shape,

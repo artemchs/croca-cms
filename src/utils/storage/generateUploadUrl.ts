@@ -1,10 +1,10 @@
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { type Storage } from "@/server/storage";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 export const generateUploadUrl = async (
   client: Storage,
-  params: { Key: string },
+  params: { Key: string }
 ) => {
   try {
     const command = new PutObjectCommand({

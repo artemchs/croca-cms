@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneGoodsImportSchemaSchema } from "./readOneGoodsImportSchema";
 import { createOneGoodsImportSchemaSchema } from "./createOneGoodsImportSchema";
+import { readOneGoodsImportSchemaSchema } from "./readOneGoodsImportSchema";
 
 export const updateOneGoodsImportSchemaSchema = z.object({
   ...readOneGoodsImportSchemaSchema.shape,

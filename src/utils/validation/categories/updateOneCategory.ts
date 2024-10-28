@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneCategorySchema } from "./readOneCategory";
 import { createOneCategorySchema } from "./createOneCategory";
+import { readOneCategorySchema } from "./readOneCategory";
 
 export const updateOneCategory = z.object({
   ...readOneCategorySchema.shape,

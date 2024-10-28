@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneIdSchema } from "./readOneId";
 import { createOneIdSchema } from "./createOneId";
+import { readOneIdSchema } from "./readOneId";
 
 export const updateOneIdSchema = z.object({
   ...readOneIdSchema.shape,

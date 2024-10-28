@@ -1,10 +1,10 @@
+import { env } from "@/env";
 import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { type Storage } from "../../server/storage";
-import { env } from "@/env";
 
 export const deleteObjects = async (
   client: Storage,
-  params: { Keys: string[] },
+  params: { Keys: string[] }
 ) => {
   try {
     const command = new DeleteObjectsCommand({

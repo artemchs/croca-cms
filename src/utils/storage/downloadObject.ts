@@ -5,7 +5,7 @@ import { type Readable } from "stream";
 
 export const downloadObject = async (
   client: Storage,
-  params: { Key: string },
+  params: { Key: string }
 ) => {
   try {
     const command = new GetObjectCommand({

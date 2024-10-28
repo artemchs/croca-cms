@@ -18,7 +18,7 @@ export default async function AdminLayout({
   return (
     <SidebarProvider>
       <AppSidebar session={session} />
-      <main className="flex h-full w-full flex-col">
+      <main className="flex h-full min-h-[100dvh] w-full flex-col bg-muted">
         <Navbar />
         {children}
       </main>

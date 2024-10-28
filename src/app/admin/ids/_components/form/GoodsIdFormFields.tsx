@@ -1,8 +1,5 @@
 "use client";
 
-import { type CreateOneIdInput } from "@/utils/validation/ids/createOneId";
-import { type UpdateOneIdInput } from "@/utils/validation/ids/updateOneId";
-import { type UseFormReturn } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   FormControl,
@@ -12,6 +9,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { type CreateOneIdInput } from "@/utils/validation/ids/createOneId";
+import { type UseFormReturn } from "react-hook-form";
 
 export function GoodsIdFormFields({
   form,

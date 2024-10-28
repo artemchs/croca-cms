@@ -8,10 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FaGoogle } from "react-icons/fa";
-import { LuLoader } from "react-icons/lu";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { FaGoogle } from "react-icons/fa";
+import { LuLoader } from "react-icons/lu";
 
 const content = {
   title: "Войти",

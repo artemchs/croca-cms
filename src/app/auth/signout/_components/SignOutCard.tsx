@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/card";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { LuLoader } from "react-icons/lu";
-import { LuLogOut } from "react-icons/lu";
+import { LuLoader, LuLogOut } from "react-icons/lu";
 
 const content = {
   title: "Выйти",

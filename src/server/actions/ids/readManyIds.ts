@@ -9,14 +9,16 @@ export const readManyIds = async ({
   tx: PrismaTransaction;
   payload: ReadManyIdsInput;
 }) => {
-  const { search, filters, cursor, limit, orderBy } = payload;
+  const { search, filters, page, limit, orderBy } = payload;
 
   const query: Prisma.GoodsIdFindManyArgs = {
     where: {},
     take: limit,
-    cursor: cursor ? { id: cursor } : undefined,
-    skip: cursor ? 1 : 0,
-    orderBy: orderBy ? { [orderBy.field]: orderBy.direction } : undefined,
+    skip: (page - 1) * limit,
+    orderBy:
+      orderBy?.field && orderBy.direction
+        ? { [orderBy.field]: orderBy.direction }
+        : undefined,
   };
 
   if (query.where) {
@@ -30,8 +32,13 @@ export const readManyIds = async ({
     // TODO: Add filters here...
   }
 
-  return await Promise.all([
+  const [items, count] = await Promise.all([
     tx.goodsId.findMany(query),
     tx.goodsId.count({ where: query.where }),
   ]);
+
+  return {
+    items,
+    count,
+  };
 };

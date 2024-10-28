@@ -1,7 +1,14 @@
 "use client";
 
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { NavItem } from "./app-sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
 import {
   SidebarMenuButton,
   SidebarMenuItem,
@@ -9,13 +16,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "./ui/sidebar";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible";
-import { ChevronRight } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export function SidebarMenuItemAdjustable({ item }: { item: NavItem }) {
   const pathname = usePathname();

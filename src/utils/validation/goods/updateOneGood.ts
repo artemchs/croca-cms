@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { readOneGoodSchema } from "./readOneGood";
 import { createOneGoodSchema } from "./createOneGood";
+import { readOneGoodSchema } from "./readOneGood";
 
 export const updateOneGoodSchema = z.object({
   ...readOneGoodSchema.shape,

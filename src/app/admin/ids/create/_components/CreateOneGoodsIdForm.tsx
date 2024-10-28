@@ -1,21 +1,22 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { api } from "@/trpc/react";
 import {
   type CreateOneIdInput,
   createOneIdSchema,
 } from "@/utils/validation/ids/createOneId";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { GoodsIdFormFields } from "../../_components/form/GoodsIdFormFields";
 import { Loader, Plus } from "lucide-react";
-import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { GoodsIdFormFields } from "../../_components/form/GoodsIdFormFields";
 
 export function CreateOneGoodsIdForm() {
   const router = useRouter();
+  const apiUtils = api.useUtils();
 
   const form = useForm<CreateOneIdInput>({
     resolver: zodResolver(createOneIdSchema),
@@ -25,9 +26,10 @@ export function CreateOneGoodsIdForm() {
   });
 
   const { mutate, isPending } = api.ids.createOne.useMutation({
-    onSuccess() {
+    async onSuccess() {
       router.push("/admin/ids");
       toast.success("Идентификатор успешно создан");
+      await Promise.all([apiUtils.ids.readMany.invalidate()]);
     },
     onError({ message }) {
       toast.error(message);
