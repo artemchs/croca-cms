@@ -2,9 +2,9 @@ import { z } from "zod";
 import { createOneCategorySchema } from "./createOneCategory";
 import { readOneCategorySchema } from "./readOneCategory";
 
-export const updateOneCategory = z.object({
+export const updateOneCategorySchema = z.object({
   ...readOneCategorySchema.shape,
   ...createOneCategorySchema.shape,
 });
 
-export type UpdateOneCategoryInput = z.infer<typeof updateOneCategory>;
+export type UpdateOneCategoryInput = z.infer<typeof updateOneCategorySchema>;

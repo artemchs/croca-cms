@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const readManyCategories = z.object({
+export const readManyCategoriesSchema = z.object({
   search: z.string().optional(),
   filters: z
     .object({
@@ -17,4 +17,4 @@ export const readManyCategories = z.object({
     .optional(),
 });
 
-export type ReadManyCategoriesInput = z.infer<typeof readManyCategories>;
+export type ReadManyCategoriesInput = z.infer<typeof readManyCategoriesSchema>;
